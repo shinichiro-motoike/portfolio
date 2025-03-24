@@ -1,27 +1,26 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { reactive } from 'vue'
+
+interface SocialLink {
+  label: string
+  name: string
+  url: string
+}
+
+const socialLinks = reactive<SocialLink[]>([
+  { label: 'GitHub', name: 'shinichiro-motoike', url: 'https://github.com/shinichiro-motoike' },
+  { label: 'X（Twitter）', name: 'moto_shin_', url: 'https://x.com/moto_shin_' },
+  { label: 'Zenn', name: 'motoshin', url: 'https://zenn.dev/motoshin' },
+  { label: 'Qiita', name: 'shin_moto', url: 'https://qiita.com/shin_moto' },
+])
+</script>
 
 <template>
   <div>
-    <dl>
-      <dt>GitHub</dt>
+    <dl v-for="sociallink in socialLinks" :key="sociallink.name">
+      <dt>{{ sociallink.label }}</dt>
       <dd>
-        <a href="https://github.com/shinichiro-motoike" target="_brank" rel="nofollow"
-          >shinichiro-motoike</a
-        >
-      </dd>
-    </dl>
-    <dl>
-      <dt>X (Twitter)</dt>
-      <dd><a href="https://x.com/moto_shin_" target="_brank" rel="nofollow">moto_shin_</a></dd>
-    </dl>
-    <dl>
-      <dt>Zenn</dt>
-      <dd><a href="https://zenn.dev/motoshin" target="_brank" rel="nofollow">motoshin</a></dd>
-    </dl>
-    <dl>
-      <dt>Qiita</dt>
-      <dd>
-        <a href="https://qiita.com/shin_moto" target="_brank" rel="nofollow">shin_moto</a>
+        <a :href="sociallink.url" target="_blank" rel="nofollow">{{ sociallink.name }}</a>
       </dd>
     </dl>
   </div>
