@@ -12,7 +12,7 @@ import AboutMe from './components/AboutMe.vue'
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/about">Blog</RouterLink>
       </nav>
     </div>
   </header>
