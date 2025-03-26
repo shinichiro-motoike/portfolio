@@ -5,13 +5,14 @@ import { render, screen } from '@testing-library/vue'
 import ProfileLinks from '../ProfileLinks.vue'
 
 describe('ProfileLinks', () => {
-  test('プロフィールが正しく表示できていること', () => {
-    render(ProfileLinks)
+  test('プロフィール項目の各ラベルが正しく表示できていること', () => {
+    const { getAllByRole } = render(ProfileLinks)
+    const dtElements = getAllByRole('term')
 
-    expect(screen.getByText('GitHub')).toBeInTheDocument()
-    expect(screen.getByText('X（Twitter）')).toBeInTheDocument()
-    expect(screen.getByText('Zenn')).toBeInTheDocument()
-    expect(screen.getByText('Qiita')).toBeInTheDocument()
+    expect(dtElements[0].textContent).toBe('GitHub')
+    expect(dtElements[1].textContent).toBe('X（Twitter）')
+    expect(dtElements[2].textContent).toBe('Zenn')
+    expect(dtElements[3].textContent).toBe('Qiita')
   })
 
   test('リンクが正しい URL を指していること', () => {
