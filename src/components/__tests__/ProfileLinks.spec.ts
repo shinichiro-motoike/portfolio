@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest'
 import '@testing-library/jest-dom/vitest'
-import { render, screen } from '@testing-library/vue'
+import { render } from '@testing-library/vue'
 
 import ProfileLinks from '../ProfileLinks.vue'
 
@@ -16,13 +16,19 @@ describe('ProfileLinks', () => {
   })
 
   test('リンクが正しい URL を指していること', () => {
-    const GitHubLink = screen.getByText('shinichiro-motoike')
-    expect(GitHubLink).toHaveAttribute('href', 'https://github.com/shinichiro-motoike')
-    const XLink = screen.getByText('moto_shin_')
-    expect(XLink).toHaveAttribute('href', 'https://x.com/moto_shin_')
-    const ZennLink = screen.getByText('motoshin')
-    expect(ZennLink).toHaveAttribute('href', 'https://zenn.dev/motoshin')
-    const QiitaLink = screen.getByText('shin_moto')
-    expect(QiitaLink).toHaveAttribute('href', 'https://qiita.com/shin_moto')
+    const { getAllByRole } = render(ProfileLinks)
+    const linkElements = getAllByRole('link')
+
+    expect(linkElements[0].textContent).toBe('shinichiro-motoike')
+    expect(linkElements[0]).toHaveAttribute('href', 'https://github.com/shinichiro-motoike')
+
+    expect(linkElements[1].textContent).toBe('moto_shin_')
+    expect(linkElements[1]).toHaveAttribute('href', 'https://x.com/moto_shin_')
+
+    expect(linkElements[2].textContent).toBe('motoshin')
+    expect(linkElements[2]).toHaveAttribute('href', 'https://zenn.dev/motoshin')
+
+    expect(linkElements[3].textContent).toBe('shin_moto')
+    expect(linkElements[3]).toHaveAttribute('href', 'https://qiita.com/shin_moto')
   })
 })
